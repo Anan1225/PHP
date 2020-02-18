@@ -1,0 +1,47 @@
+<?php
+	include_once('item.php');
+	
+	class MessageBoard{
+		var $messages = array();
+		
+		function __construct(){
+			$this->receiveMessage();
+			$this->loadData();
+			$this->showAllMessage();
+			$this->showForm();
+		}
+		//资料接收
+		function receiveMessage(){
+			if(count($_POST) != 0){
+				$this->saveData($_POST['userName'], date("Y-M-D h:i:s",time()), $_POST['content']);
+			}
+		}
+		//
+		function saveData($u,$t,$c){
+			echo "userName: ".$u."<br>";
+			echo "time: ".$t."<br>";
+			echo "content: ".$c."<br>";
+		}
+		function loadData(){
+			$temp = new Message("Anan","2020.02.17","Here");
+			array_push($this->messages, $temp);
+			$temp = new Message("Bina","2020.02.17","Here 2");
+			array_push($this->messages, $temp);
+		}
+		//显示画面
+		function showAllMessage(){
+			foreach($this->messages as $m){
+				$m->show();
+			}
+		}
+		function showForm(){
+			echo "<form action='' method='POST'>";
+			echo "Name: "."<input type='text' name='userName'>"."<br>";
+			echo "Content: "."<input type='text' name='content'>";
+			echo "<input type='submit'>";
+			echo "</form>";
+		}
+	}
+	//执行
+	$mb =new MessageBoard();
+?>
