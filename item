@@ -1,0 +1,50 @@
+<?php
+//变量声明
+class Message{
+	var $name;
+	var $time;
+	var $content;
+	
+	function __construct($n, $t, $c){
+		$this->name = $n;
+		$this->time = $t;
+		$this->content = $c;
+	}
+	function show(){
+		echo "Name: ", $this->name, "<br>";
+		echo "Time: ", $this->time, "<br>";
+		echo "Content: ", $this->content, "<br>";
+		echo "---------------------<br>";
+	}
+}
+
+class DB{
+	var $database = null;
+	//连线
+	function __construct(){
+		//???为什么登不上啊
+		$dbhost = "localhost";
+		$account = "Anan1225";
+		$password = "122537666";
+		
+		$this->database = mysql_connect($dbhost, $account, $password);
+		if($this->database){
+			echo "DB connected.";
+		}else{
+			echo "DB connected fail.";
+		}
+	}
+	//断线
+	function __destruct(){
+		mysql_close($this->database);
+	}
+}
+// 执行
+	//$m= new Message("Anan","2020.02.17","Here");
+	//$m->show();
+	
+	//var_dump($m);
+	
+	$db = new DB;
+?>
+		
